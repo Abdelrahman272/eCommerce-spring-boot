@@ -10,8 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
-    // private List<Category> categories = new ArrayList<>();
+public class CategoryServiceImpl implements CategoryService{
     private Long nextId = 1L;
 
     @Autowired
