@@ -6,11 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity(name = "products")
+@Table(name = "products", uniqueConstraints = @UniqueConstraint(columnNames = {"category_id", "productName"}))
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,8 +23,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
+
+    @NotBlank
+    @Size(min = 3, message = "Product name must contain at least 3 characters")
     private String productName;
     private String image;
+
+    @NotBlank
+    @Size(min = 6, message = "Product description must contain at least 6 characters")
     private String description;
     private Integer quantity;
     private double price;
